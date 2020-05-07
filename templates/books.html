@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Books
+{% endblock %}
+
+{% block body %}
+  <nav class="navbar navbar-expand-lg my-lg-0 navbar-light bg-light">
+    <a class="navbar-brand" href="/">Book Review</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>All Books</h1>
+  <ul>
+    {% if books|length >= 1 %}
+      {% for book in books %}
+        <div class="list-group">
+          <a href="{{ url_for('book', book_id=book.id)}}" class="list-group-item list-group-item-action list-group-item-info">
+            ISBN number: {{ book.isbn }}, title: {{ book.title }}, author: {{ book.author }}, year: {{ book.year }}
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="alert alert-warning" role="alert">
+        No result found for the query. Please try again!
+      </div>
+    {% endif %}
+  </ul>
+{% endblock %}

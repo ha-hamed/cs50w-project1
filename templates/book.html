@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book
+{% endblock %}
+
+{% block body %}
+  <nav class="navbar navbar-expand-lg my-lg-0 navbar-light bg-light">
+    <a class="navbar-brand" href="/">Book Review</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>Book Details</h1>
+
+  <ul class="list-group">
+      <li class="list-group-item">ISBN number: {{ book.isbn }}</li>
+      <li class="list-group-item">Title: {{ book.title }}</li>
+      <li class="list-group-item">Author: {{ book.author}}</li>
+      <li class="list-group-item">Publication year: {{ book.year }}
+  </ul>
+
+  <hr>
+
+  <h3>Reviews</h3>
+
+  {% if reviews is not none %}
+    {% for review in reviews %}
+      <ul class="list-group">
+          <li class="list-group-item">Rating: {{ review.rating }}, Opinion: {% if review.message is none%} not provided. {% else %} {{ review.message }} {% endif %}</li>
+      </ul>
+    {% endfor %}
+  {% else %}
+    No reviews yet.
+  {% endif %}
+
+  <hr>
+
+  <h3>Goodreads Review Data</h3>
+
+  {% if goodreads is not none %}
+    <ul class="list-group">
+        <li class="list-group-item">Average rating: {{ goodreads.average_rating }}</li>
+        <li class="list-group-item">Number of ratings: {{ goodreads.ratings_count }}
+    </ul>
+  {% else %}
+    No goodreads reviews available.
+  {% endif %}
+
+  <hr>
+
+  <h3>Review Submission</h3>
+
+  <form action="{{ url_for('book', book_id=book.id) }}" method="post">
+    <div class="form-group">
+      <label for="rating">Select rating</label>
+      <select class="form-control" id="rating", name="rating">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="rating_opinon">Opinion</label>
+      <textarea class="form-control" id="rating_opinon" name="rating_opinon"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}
