@@ -48,3 +48,6 @@ $ flask run
 - Flask-Session
 - psycopg2-binary
 - SQLAlchemy
+- gunicorn
+- requests
+- Werkzeug==0.16.0
