@@ -1,4 +1,5 @@
 # Book Review
+Able to use the application on Heroku - https://edxcs50w-project1.herokuapp.com/
 
 Users are able to register, then log in using their email address and password.
 Once log in, the will be able to search for books, leave reviews for individual
